@@ -20,7 +20,7 @@ parser.add_option('--gpu', type=int, help="gpu id", default=0)
 parser.add_option('--resume', type=int, help="resume training?", default=0)
 parser.add_option('--config', type=str, help="net configuration")
 parser.add_option('--log', type=str, help="log path")
-parser.add_option('--roi', type=str, help='region of interests (x y w h)')
+parser.add_option('--roi', type=str, help='region of interests (x,y,w,h)')
 
 MAX_EPOCHS = 100000
 
@@ -38,7 +38,7 @@ def main(argv):
   train_loader_b = get_data_loader(config.datasets['train_b'], batch_size)
 
   # Parse ROI parameters
-  roi = [int(val_str) for val_str in config.hyperparameters['roi'].split()]
+  roi = [int(val_str) for val_str in opts.roi.split(',')]
   roi_x = roi[0]
   roi_y = roi[1]
   roi_w = roi[2]
