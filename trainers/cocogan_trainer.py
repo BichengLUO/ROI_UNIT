@@ -88,6 +88,10 @@ class COCOGANTrainer(nn.Module):
   def dis_update(self, images_a, images_b, hyperparameters):
     self.dis.zero_grad()
     x_aa, x_ba, x_ab, x_bb, shared = self.gen(images_a, images_b)
+    print(images_a.size())
+    print(images_b.size())
+    print(x_ba.size())
+    print(x_ab.size())
     data_a = torch.cat((images_a, x_ba), 0)
     data_b = torch.cat((images_b, x_ab), 0)
     res_a, res_b = self.dis(data_a,data_b)
