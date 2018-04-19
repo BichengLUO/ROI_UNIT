@@ -69,12 +69,13 @@ def main(argv):
     for it, (images_a, images_b) in enumerate(izip(train_loader_a,train_loader_b)):
       if images_a.size(0) != batch_size or images_b.size(0) != batch_size:
         continue
-      images_a = Variable(images_a.cuda(opts.gpu))
-      images_b = Variable(images_b.cuda(opts.gpu))
-
+      
       # Crop images according to ROI
       roi_images_a = Variable(images_a[roi_y:roi_y+roi_h, roi_x:roi_x+roi_w].cuda(opts.gpu))
       roi_images_b = Variable(images_b[roi_y:roi_y+roi_h, roi_x:roi_x+roi_w].cuda(opts.gpu))
+      
+      images_a = Variable(images_a.cuda(opts.gpu))
+      images_b = Variable(images_b.cuda(opts.gpu))
 
       # Main training code
       trainer.dis_update(images_a, images_b, config.hyperparameters)
