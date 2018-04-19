@@ -71,8 +71,8 @@ def main(argv):
         continue
       
       # Crop images according to ROI
-      roi_images_a = images_a[roi_y:roi_y+roi_h, roi_x:roi_x+roi_w, :].copy()
-      roi_images_b = images_b[roi_y:roi_y+roi_h, roi_x:roi_x+roi_w, :].copy()
+      roi_images_a = images_a[roi_y:roi_y+roi_h, roi_x:roi_x+roi_w, :].clone()
+      roi_images_b = images_b[roi_y:roi_y+roi_h, roi_x:roi_x+roi_w, :].clone()
 
       roi_images_a = Variable(roi_images_a.cuda(opts.gpu))
       roi_images_b = Variable(roi_images_b.cuda(opts.gpu))
