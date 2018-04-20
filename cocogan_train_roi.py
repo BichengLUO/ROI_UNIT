@@ -93,8 +93,8 @@ def main(argv):
       x_aa, x_ba, x_ab, x_bb, shared = trainer.gen(images_a, images_b)
       x_ba_paste = x_ba.clone()
       x_ab_paste = x_ab.clone()
-      x_ba_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_image_outputs[1]
-      x_ab_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_image_outputs[2]
+      x_ba_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_image_outputs[1].clone()
+      x_ab_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_image_outputs[2].clone()
       trainer.gen.zero_grad()
       image_outputs = trainer.gen_update_helper(images_a, images_b, x_aa, x_ba_paste, x_ab_paste, x_bb, shared, config.hyperparameters)
       assembled_images = trainer.assemble_outputs(images_a, images_b, image_outputs)

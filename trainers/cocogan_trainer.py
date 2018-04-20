@@ -66,7 +66,7 @@ class COCOGANTrainer(nn.Module):
                  hyperparameters['ll_cycle_link_w'] * (ll_loss_aba + ll_loss_bab) + \
                  hyperparameters['kl_direct_link_w'] * (enc_loss + enc_loss) + \
                  hyperparameters['kl_cycle_link_w'] * (enc_bab_loss + enc_aba_loss)
-    total_loss.backward()
+    total_loss.backward(retain_graph=True)
     self.gen_opt.step()
     self.gen_enc_loss = enc_loss.data.cpu().numpy()[0]
     self.gen_enc_bab_loss = enc_bab_loss.data.cpu().numpy()[0]
