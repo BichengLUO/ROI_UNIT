@@ -86,16 +86,15 @@ def main(argv):
 
       # Training code for ROI
       roi_trainer.dis_update(roi_images_a, roi_images_b, config.hyperparameters)
-      roi_image_outputs = trainer.gen_update(roi_images_a, roi_images_b, config.hyperparameters)
-      roi_assembled_images = trainer.assemble_outputs(roi_images_a, roi_images_b, roi_image_outputs)
+      roi_image_outputs = roi_trainer.gen_update(roi_images_a, roi_images_b, config.hyperparameters)
+      roi_assembled_images = roi_trainer.assemble_outputs(roi_images_a, roi_images_b, roi_image_outputs)
 
       # Paste ROI to original images to update generator
       x_aa, x_ba, x_ab, x_bb, shared = trainer.gen(images_a, images_b)
-      _, roi_x_ba, roi_x_ab, _, _ = roi_trainer.gen(roi_images_a, roi_images_b)
       x_ba_paste = x_ba.clone()
       x_ab_paste = x_ab.clone()
-      x_ba_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_x_ba.clone()
-      x_ab_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_x_ab.clone()
+      x_ba_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_image_outputs[1]
+      x_ab_paste[:, :, roi_y:roi_y+roi_h, roi_x:roi_x+roi_w] = roi_image_outputs[2]
       trainer.gen.zero_grad()
       image_outputs = trainer.gen_update_helper(images_a, images_b, x_aa, x_ba_paste, x_ab_paste, x_bb, shared, config.hyperparameters)
       assembled_images = trainer.assemble_outputs(images_a, images_b, image_outputs)
