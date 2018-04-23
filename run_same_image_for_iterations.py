@@ -57,7 +57,9 @@ def main(argv):
       output_data = trainer.gen.forward_b2a(final_data)
     basename = os.path.basename(os.path.splitext(weight_path)[0])
     assembled_images = torch.cat((final_data, output_data[0]), 3)
-    torchvision.utils.save_image(assembled_images.data / 2.0 + 0.5, os.path.join(directory, basename + ".jpg"))
+    output_image_path = os.path.join(directory, basename + ".jpg")
+    torchvision.utils.save_image(assembled_images.data / 2.0 + 0.5, output_image_path)
+    print(output_image_path)
 
   return 0
 
