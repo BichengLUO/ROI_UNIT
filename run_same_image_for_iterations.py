@@ -49,7 +49,7 @@ def main(argv):
     raw_data = img.transpose((2, 0, 1))  # convert to HWC
     final_data = torch.FloatTensor((raw_data / 255.0 - 0.5) * 2)
     final_data = final_data.contiguous()
-    final_data = Variable(final_data.view(1,final_data.size(0),final_data.size(1),final_data.size(2))).cuda(opts.gpu)
+    final_data = Variable(final_data.view(1,final_data.size(0),final_data.size(1),final_data.size(2))).cuda(0)
     # trainer.gen.eval()
     if opts.a2b == 1:
       output_data = trainer.gen.forward_a2b(final_data)
