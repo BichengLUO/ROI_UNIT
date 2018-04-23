@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from datasets import *
 import os
 import sys
