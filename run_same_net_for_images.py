@@ -57,7 +57,7 @@ def main(argv):
     print("end position have to be larger than start position")
     return -1
   if not os.path.exists(opts.output_folder):
-    os.makedirs(directory)
+    os.makedirs(opts.output_folder)
   for i in range(opts.start, len(image_list) if opts.end <= 0 else opts.end):
     image_name = image_list[i]
     if image_name == '':
