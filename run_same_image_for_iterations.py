@@ -59,7 +59,7 @@ def main(argv):
     assembled_images = torch.cat((final_data, output_data[0]), 3)
     output_image_path = os.path.join(directory, basename + ".jpg")
     torchvision.utils.save_image(assembled_images.data / 2.0 + 0.5, output_image_path)
-    print(output_image_path)
+    print(weight_path + ' --> ' + output_image_path)
 
   return 0
 
