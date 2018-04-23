@@ -41,7 +41,7 @@ def main(argv):
   for weight_path in weight_files:
     # Prepare network
     trainer.gen.load_state_dict(torch.load(weight_path))
-    trainer.cuda(opts.gpu)
+    trainer.cuda(0)
     trainer.gen.eval()
 
     full_img_name = opts.image_name
