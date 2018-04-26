@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+'''
+ROI Constraint UNIT
+Bicheng Luo (UNI:bl2679)
+A script to generate image translation results for multiple generators
+'''
 from datasets import *
 import os
 import sys
@@ -15,6 +20,7 @@ parser.add_option('--a2b',type=int,help="1 for a2b and others for b2a",default=1
 parser.add_option('--config',type=str,help="net configuration")
 parser.add_option('--image_name',type=str)
 
+#bl2679
 def main(argv):
   (opts, args) = parser.parse_args(argv)
 

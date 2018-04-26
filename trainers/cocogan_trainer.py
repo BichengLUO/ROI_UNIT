@@ -1,7 +1,8 @@
-"""
-Copyright (C) 2017 NVIDIA Corporation.  All rights reserved.
-Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
-"""
+'''
+ROI Constraint UNIT
+Bicheng Luo (UNI:bl2679)
+A script for implementing the weight update operation of generators and discriminators. I modified the weight update function to adapt to our needs.
+'''
 from .cocogan_nets import *
 from .helpers import get_model_list, _compute_fake_acc, _compute_true_acc
 from .init import *
@@ -39,9 +40,12 @@ class COCOGANTrainer(nn.Module):
     encoding_loss = torch.mean(mu_2)
     return encoding_loss
   
+  #bl2679
   def gen_update_helper(self, images_a, images_b, x_aa, x_ba, x_ab, x_bb, shared, hyperparameters):
+    # Generate B->A->B and A->B->A from B->A and A->B
     x_bab, shared_bab = self.gen.forward_a2b(x_ba)
     x_aba, shared_aba = self.gen.forward_b2a(x_ab)
+    # Calculate loss via the discriminator
     outs_a, outs_b = self.dis(x_ba,x_ab)
     for it, (out_a, out_b) in enumerate(itertools.izip(outs_a, outs_b)):
       outputs_a = nn.functional.sigmoid(out_a)
@@ -53,7 +57,7 @@ class COCOGANTrainer(nn.Module):
       else:
         ad_loss_a += nn.functional.binary_cross_entropy(outputs_a, all_ones)
         ad_loss_b += nn.functional.binary_cross_entropy(outputs_b, all_ones)
-
+    # Calculate the total loss togehter
     enc_loss  = self._compute_kl(shared)
     enc_bab_loss = self._compute_kl(shared_bab)
     enc_aba_loss = self._compute_kl(shared_aba)
@@ -66,6 +70,7 @@ class COCOGANTrainer(nn.Module):
                  hyperparameters['ll_cycle_link_w'] * (ll_loss_aba + ll_loss_bab) + \
                  hyperparameters['kl_direct_link_w'] * (enc_loss + enc_loss) + \
                  hyperparameters['kl_cycle_link_w'] * (enc_bab_loss + enc_aba_loss)
+    # Update the gradient
     total_loss.backward(retain_graph=True)
     self.gen_opt.step()
     self.gen_enc_loss = enc_loss.data.cpu().numpy()[0]
@@ -79,8 +84,10 @@ class COCOGANTrainer(nn.Module):
     self.gen_ll_loss_bab = ll_loss_bab.data.cpu().numpy()[0]
     self.gen_total_loss = total_loss.data.cpu().numpy()[0]
     return (x_aa, x_ba, x_ab, x_bb, x_aba, x_bab)
-
+  
+  #bl2679
   def gen_update(self, images_a, images_b, hyperparameters):
+    # Update the generator weights using the generated A->B, B->A
     self.gen.zero_grad()
     x_aa, x_ba, x_ab, x_bb, shared = self.gen(images_a, images_b)
     return self.gen_update_helper(images_a, images_b, x_aa, x_ba, x_ab, x_bb, shared, hyperparameters)

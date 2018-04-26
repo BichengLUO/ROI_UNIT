@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+'''
+ROI Constraint UNIT
+Bicheng Luo (UNI:bl2679)
+A script to generate multiple image translation results using a specific generator
+'''
 from __future__ import print_function
 from common import *
 import sys
@@ -16,6 +21,7 @@ parser.add_option('--output_folder',type=str,help="output image folder")
 parser.add_option('--start',type=int,help="start position", default=0)
 parser.add_option('--end',type=int,help="end position", default=0)
 
+#bl2679
 def main(argv):
   (opts, args) = parser.parse_args(argv)
 

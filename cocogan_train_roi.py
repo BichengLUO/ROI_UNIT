@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-
-"""
-Copyright (C) 2017 NVIDIA Corporation.  All rights reserved.
-Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
-"""
+'''
+ROI Constraint UNIT
+Bicheng Luo (UNI:bl2679)
+Training script of ROI (Region of Interest) Constraint UNIT. I basically add a ROI generator and discriminator to enforce cycle consistency to the cropped image domains.
+'''
 from __future__ import print_function
 from common import get_data_loader, prepare_snapshot_and_image_folder, write_html, write_loss
 from tools import *
@@ -24,6 +24,7 @@ parser.add_option('--roi', type=str, help='region of interests (x,y,w,h)')
 
 MAX_EPOCHS = 100000
 
+#bl2679
 def main(argv):
   (opts, args) = parser.parse_args(argv)
 
