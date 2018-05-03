@@ -1,6 +1,14 @@
 # ROI Constraint UNIT
 [Unsupervised Image-to-Image Translation Networks (UNIT)](https://github.com/mingyuliutw/UNIT) proposed by NVIDIA presented a general framework for unsupervised image-to-image translation. This network can learn to translate an image from one domain to another without any image pairs information between the two domains. In this report, I basically add region of interest (ROI) constraint to UNIT to enhance the ability of transferring images between summer and winter on a specific dataset "Cab Ride Norway : Trondheim - Bodø Nordland Line"([summer](https://www.youtube.com/watch?v=TY1sbKvjNcY&t=1057s), [winter](https://www.youtube.com/watch?v=9pVWfzsgLoQ&t=8081s)). The experiment results show an improvement both on the training speed and the image translation quality between summer and winter railway trip.
 
+Winter to summer:
+
+![winter_to_summer](images/exp5_6.gif)
+
+Summer to winter:
+
+![summer_to_winter](images/exp7_8.gif)
+
 ## Baseline Method
 * UNIT: UNsupervised Image-to-image Translation Networks
 * GitHub repo: https://github.com/mingyuliutw/UNIT
