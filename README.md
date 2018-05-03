@@ -1,13 +1,12 @@
-ROI Constraint UNIT
-Bicheng Luo (UNI:bl2679)
+# ROI Constraint UNIT
 
-Baseline Method:
-UNIT: UNsupervised Image-to-image Translation Networks
-GitHub repo: https://github.com/mingyuliutw/UNIT
-Paper link: https://arxiv.org/abs/1703.00848
+## Baseline Method
+* UNIT: UNsupervised Image-to-image Translation Networks
+* GitHub repo: https://github.com/mingyuliutw/UNIT
+* Paper link: https://arxiv.org/abs/1703.00848
 
-Organization of Codes:
-- The original UNIT:
+## Organization of Codes
+- The original UNIT
     - datasets
         Directory for different kinds of image loaders, defined in the original UNIT
     - tools
@@ -22,8 +21,7 @@ Organization of Codes:
         Inference script for translating all images from image loader to the other domain
     - common.py
         A helper script for training utilization 
-
-- My improvement:
+- My improvement
     - cocogan_train_roi.py
         Training script of ROI (Region of Interest) Constraint UNIT. I basically add a ROI generator and discriminator to enforce cycle consistency to the cropped image domains.
     - trainers/cocgan_trainer.py
