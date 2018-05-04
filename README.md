@@ -21,6 +21,8 @@ Summer to winter:
 ## ROI Constraint
 We propose a new assumption called ROI-specific shared-latent: The cycle consistency for the region of interest in two image domains has been enforced and the specific region of two images will be mapped to a same latent space.
 
+<img src="images/roi-specific-shared-latent.png" width="400" />
+
 ## Organization of Codes
 - The original UNIT
     - `datasets`
